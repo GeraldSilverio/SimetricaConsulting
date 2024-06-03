@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagement.Core.Application;
 using TaskManagement.Infraestructure.Identity;
 using TaskManagement.Infraestructure.Identity.Seeds;
 using TaskManagement.Infraestructure.Persistence;
@@ -20,6 +21,7 @@ builder.Services.AddControllers(options =>
 //Dependecias de las capas.
 builder.Services.AddIdentityInfrastructure(builder.Configuration);
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddApplicationLayer();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

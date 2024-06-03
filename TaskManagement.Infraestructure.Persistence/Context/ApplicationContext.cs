@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using TaskManagement.Core.Domain.Commons;
 using TaskManagement.Core.Domain.Entities;
 using TaskManagement.Infraestructure.Persistence.EntitiesConfiguration;
 using TaskStatus = TaskManagement.Core.Domain.Entities.TaskStatus;
@@ -10,6 +12,8 @@ public class ApplicationContext : DbContext
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
     }
+
+   
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

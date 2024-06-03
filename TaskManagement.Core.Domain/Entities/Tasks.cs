@@ -9,4 +9,18 @@ public class Tasks : AuditoryProperties
     public string IdUser { get; set; }
     public int IdTaskStatus { get; set; }
     public TaskStatus TaskStatus { get; set; }
+
+    public Tasks()
+    {
+
+    }
+
+    public Tasks(string name, string idUser, int idTaskStatus, string createdBy)
+    {
+        Name = name;
+        IdUser = idUser;
+        IdTaskStatus = idTaskStatus;
+        CreatedBy = createdBy;
+        IsActive = true;
+    }
 }

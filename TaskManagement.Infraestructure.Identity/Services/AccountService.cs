@@ -185,4 +185,16 @@ public class AccountService : IAccountService
         model.Error?.Add(error);
         return model;
     }
+
+    public string GetIdUser()
+    {
+        try
+        {
+            return _jwtServices.GetIdUser();
+        }
+        catch (Exception ex)
+        {
+            throw new ApplicationException(ex.Message, ex);
+        }
+    }
 }

@@ -2,8 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Oracle.EntityFrameworkCore.Metadata;
 using TaskManagement.Infraestructure.Persistence.Context;
 
 #nullable disable
@@ -20,35 +20,35 @@ namespace TaskManagement.Infraestructure.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("TaskManagement.Core.Domain.Entities.TaskStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("TIMESTAMP(7)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("IsActive")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("TIMESTAMP(7)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("NVARCHAR2(30)");
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -62,30 +62,30 @@ namespace TaskManagement.Infraestructure.Persistence.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Admin",
-                            CreatedDate = new DateTime(2024, 6, 2, 21, 52, 0, 685, DateTimeKind.Local).AddTicks(9008),
+                            CreatedDate = new DateTime(2024, 6, 3, 8, 3, 38, 808, DateTimeKind.Local).AddTicks(3209),
                             IsActive = 1,
                             ModifiedBy = "N/A",
-                            ModifiedDate = new DateTime(2024, 6, 2, 21, 52, 0, 685, DateTimeKind.Local).AddTicks(9049),
+                            ModifiedDate = new DateTime(2024, 6, 3, 8, 3, 38, 808, DateTimeKind.Local).AddTicks(3224),
                             Name = "Nueva"
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "Admin",
-                            CreatedDate = new DateTime(2024, 6, 2, 21, 52, 0, 685, DateTimeKind.Local).AddTicks(9053),
+                            CreatedDate = new DateTime(2024, 6, 3, 8, 3, 38, 808, DateTimeKind.Local).AddTicks(3226),
                             IsActive = 1,
                             ModifiedBy = "N/A",
-                            ModifiedDate = new DateTime(2024, 6, 2, 21, 52, 0, 685, DateTimeKind.Local).AddTicks(9054),
+                            ModifiedDate = new DateTime(2024, 6, 3, 8, 3, 38, 808, DateTimeKind.Local).AddTicks(3226),
                             Name = "En proceso"
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = "Admin",
-                            CreatedDate = new DateTime(2024, 6, 2, 21, 52, 0, 685, DateTimeKind.Local).AddTicks(9057),
+                            CreatedDate = new DateTime(2024, 6, 3, 8, 3, 38, 808, DateTimeKind.Local).AddTicks(3228),
                             IsActive = 1,
                             ModifiedBy = "N/A",
-                            ModifiedDate = new DateTime(2024, 6, 2, 21, 52, 0, 685, DateTimeKind.Local).AddTicks(9058),
+                            ModifiedDate = new DateTime(2024, 6, 3, 8, 3, 38, 808, DateTimeKind.Local).AddTicks(3228),
                             Name = "Completada"
                         });
                 });
@@ -94,36 +94,36 @@ namespace TaskManagement.Infraestructure.Persistence.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("TIMESTAMP(7)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("IdTaskStatus")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<string>("IdUser")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IsActive")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("TIMESTAMP(7)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(60)
-                        .HasColumnType("NVARCHAR2(60)");
+                        .HasColumnType("nvarchar(60)");
 
                     b.HasKey("Id");
 
