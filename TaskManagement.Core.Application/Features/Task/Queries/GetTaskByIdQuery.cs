@@ -43,7 +43,17 @@ namespace TaskManagement.Core.Application.Features.Task.Queries
                     throw new ApiException("This task wasn´t created by you", (int)HttpStatusCode.Forbidden);
                 }
 
-                return new Response<TaskDto>(task);
+                var taskDto = new TaskDto()
+                {
+                    Id = task.Id,
+                    IdTaskStatus = task.IdTaskStatus,
+                    Name = task.Name,
+                    IdUser = task.IdUser,
+                    Status = task.TaskStatus.Name,
+
+                };
+
+                return new Response<TaskDto>(taskDto);
 
             }
             catch (Exception ex)

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Oracle.ManagedDataAccess.Client;
 using TaskManagement.Core.Application.Dtos.Task;
 using TaskManagement.Core.Application.Interfaces.Repositories;
 using TaskManagement.Core.Domain.Entities;
@@ -15,23 +17,23 @@ namespace TaskManagement.Infraestructure.Persistence.Repositories
 {
     public class TasksRepository : BaseRepository<Tasks>, ITasksRepository
     {
+        private readonly ApplicationContext _dbContext;
 
-        public TasksRepository(ApplicationContext dbContext, IConfiguration configuration) : base(dbContext, configuration)
+        public TasksRepository(ApplicationContext dbContext, IConfiguration configuration) : base(dbContext,
+            configuration)
         {
-
+            _dbContext = dbContext;
         }
-        public async Task<List<TaskDto>> GetAllAsync(string idUser)
+
+        public async Task<List<Tasks>> GetAllAsync(string idUser)
         {
             try
             {
-                using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
+                var tasks = await _dbContext.Tasks.Where(x => x.IdUser == idUser).Where(x => x.IsActive == true).Include(x=> x.TaskStatus)
+                    .ToListAsync();
 
-                const string query = @"SELECT T.Id,T.Name, TS.Name as Status,TS.Id as IdTaskStatus,T.IdUser 
-                FROM TASK T INNER JOIN TaskStatus TS on T.IdTaskStatus = TS.Id
-                WHERE T.IsActive = 1 AND T.IdUser = @idUser";
 
-                var tasks = await connection.QueryAsync<TaskDto>(query, new {idUser});
-                return tasks.ToList();
+                return tasks;
             }
             catch (Exception ex)
             {
@@ -39,25 +41,17 @@ namespace TaskManagement.Infraestructure.Persistence.Repositories
             }
         }
 
-        public async Task<TaskDto> GetByIdAsync(int id)
+        public async Task<Tasks> GetByIdAsync(int id)
         {
             try
             {
-                using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
-
-                const string query = @"SELECT T.Id,T.Name, TS.Name as Status,TS.Id as IdTaskStatus,T.IdUser 
-                FROM TASK T INNER JOIN TaskStatus TS on T.IdTaskStatus = TS.Id
-                WHERE T.Id = @id and T.IsActive = 1";
-
-                var task = await connection.QueryFirstOrDefaultAsync<TaskDto>(query, new {id});
-                return task;
+                var tasks = await _dbContext.Tasks.Where(x => x.IsActive == true).Include(x=> x.TaskStatus).FirstOrDefaultAsync(x => x.Id == id);
+                return tasks;
             }
             catch (Exception ex)
             {
                 throw new ApplicationException(ex.Message, ex);
             }
         }
-
-
     }
 }

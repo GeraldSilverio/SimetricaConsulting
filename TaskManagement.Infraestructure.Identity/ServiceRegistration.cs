@@ -104,11 +104,11 @@ public static class ServiceRegistration
         services.AddDbContext<IdentityContext>(options =>
         {
             options.EnableSensitiveDataLogging();
-            //options.UseOracle(configuration.GetConnectionString("IdentityConnection"),
-            //    m => m.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName));
-
-            options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"),
+            options.UseOracle(configuration.GetConnectionString("IdentityConnection"),
                 m => m.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName));
+
+            // options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"),
+            //     m => m.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName));
         });
 
         #endregion

@@ -16,7 +16,6 @@ namespace TaskManagement.Core.Application.Features.Task.Queries
 {
     public class GetAllTasksQuery : IRequest<Response<List<TaskDto>>>
     {
-
     }
 
     public class GetAllATasksQueryHandler : IRequestHandler<GetAllTasksQuery, Response<List<TaskDto>>>
@@ -41,8 +40,20 @@ namespace TaskManagement.Core.Application.Features.Task.Queries
                 {
                     throw new ApiException("Tasks not found", (int)HttpStatusCode.NoContent);
                 }
-
-                return new Response<List<TaskDto>>(tasks);
+                var taskListDto = new List<TaskDto>();
+                foreach (var task in tasks)
+                {
+                    var taskDto = new TaskDto()
+                    {
+                        IdUser = task.IdUser,
+                        Id = task.Id,
+                        Name = task.Name,
+                        IdTaskStatus = task.IdTaskStatus,
+                        Status = task.TaskStatus.Name
+                    };
+                    taskListDto.Add(taskDto);
+                }
+                return new Response<List<TaskDto>>(taskListDto);
             }
             catch (Exception ex)
             {

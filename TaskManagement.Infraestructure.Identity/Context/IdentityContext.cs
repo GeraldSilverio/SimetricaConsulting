@@ -25,12 +25,11 @@ public class IdentityContext(DbContextOptions<IdentityContext> options) : Identi
         modelBuilder.Entity<ApplicationUser>(entity =>
         {
             entity.ToTable(name: "Users");
-            //Descomentar, para poder usarlo en Oracle.
-            //entity.Property(x => x.IsActive).HasColumnType("NUMBER(1)").HasConversion(boolConverter);
-            //entity.Property(x => x.EmailConfirmed).HasColumnType("NUMBER(1)").HasConversion(boolConverter);
-            //entity.Property(x => x.PhoneNumberConfirmed).HasColumnType("NUMBER(1)").HasConversion(boolConverter);
-            //entity.Property(x => x.LockoutEnabled).HasColumnType("NUMBER(1)").HasConversion(boolConverter);
-            //entity.Property(x => x.TwoFactorEnabled).HasColumnType("NUMBER(1)").HasConversion(boolConverter);
+            entity.Property(x => x.IsActive).HasColumnType("NUMBER(1)").HasConversion(boolConverter);
+            entity.Property(x => x.EmailConfirmed).HasColumnType("NUMBER(1)").HasConversion(boolConverter);
+            entity.Property(x => x.PhoneNumberConfirmed).HasColumnType("NUMBER(1)").HasConversion(boolConverter);
+            entity.Property(x => x.LockoutEnabled).HasColumnType("NUMBER(1)").HasConversion(boolConverter);
+            entity.Property(x => x.TwoFactorEnabled).HasColumnType("NUMBER(1)").HasConversion(boolConverter);
         });
 
         

@@ -11,17 +11,17 @@ public static class ServiceRegistration
 {
     public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        //Conexion a Oracle
-        //services.AddDbContext<ApplicationContext>(options =>
-        //        options.UseOracle(configuration.GetConnectionString("DefaultConnection"),
-        //            m => m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)),
-        //    ServiceLifetime.Scoped);        
-
-        //Conexion a SqlServer
+        // Conexion a Oracle
         services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                options.UseOracle(configuration.GetConnectionString("DefaultConnection"),
                     m => m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)),
-            ServiceLifetime.Scoped);
+            ServiceLifetime.Scoped);        
+
+        // //Conexion a SqlServer
+        // services.AddDbContext<ApplicationContext>(options =>
+        //         options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+        //             m => m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)),
+        //     ServiceLifetime.Scoped);
 
 
         //Inyecciones de dependencias.

@@ -8,7 +8,7 @@ using TaskManagement.Core.Domain.Entities;
 
 namespace TaskManagement.Core.Application.Interfaces.Repositories
 {
-    public interface ITasksRepository : IBaseRepository<Tasks>, IDapperRepository<TaskDto>
+    public interface ITasksRepository : IBaseRepository<Tasks>, IDapperRepository<Tasks>
     {
     }
 }
